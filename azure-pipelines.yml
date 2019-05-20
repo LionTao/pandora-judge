@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -20,21 +20,21 @@ pool:
 #       python.version: '3.7'
 
 steps:
-# - task: UsePythonVersion@0
-#   inputs:
-#     versionSpec: '$(python.version)'
-#   displayName: 'Use Python $(python.version)'
+  # - task: UsePythonVersion@0
+  #   inputs:
+  #     versionSpec: '$(python.version)'
+  #   displayName: 'Use Python $(python.version)'
 
-- script: |
-    python3 -m pip install --upgrade --userpip
-    python3 -m pip install --upgrade --user setuptools wheel
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+  - script: |
+      sudo pip3 install --user --upgrade  pip
+      sudo pip3 -m pip install --upgrade --user setuptools wheel
+      sudo pip3 -m pip install -r requirements.txt
+    displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-  displayName: 'install pytest'
+  - script: |
+      sudo pip3 -m pip install pytest pytest-azurepipelines
+    displayName: 'install pytest'
 
-- script: |
-    bash judge.sh
-  displayName: 'install pytest'
+  - script: |
+      bash judge.sh
+    displayName: 'install pytest'
