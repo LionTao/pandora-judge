@@ -85,5 +85,11 @@ steps:
       done < "${root}/id_all.txt"
 
       cd ${root}
+      rm -rf "${root}/template"
+      rm -rf "${root}/pandora_temp_*"
+      rm "${root}/id_all.txt"
+
+      echo "====== SUMMARY ========"
+      cat "${root}/summary.txt"
 
     displayName: 'install pytest'
