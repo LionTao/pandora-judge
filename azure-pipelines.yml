@@ -26,8 +26,8 @@ steps:
 #   displayName: 'Use Python $(python.version)'
 
 - script: |
-    python3 -m pip install --upgrade pip
-    python3 -m pip install --upgrade setuptools wheel
+    python3 -m pip install --upgrade --userpip
+    python3 -m pip install --upgrade --user setuptools wheel
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
