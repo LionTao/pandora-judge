@@ -5,8 +5,8 @@ root=$(pwd)
 
 rm -rf "${root}/template"
 rm -rf "${root}/pandora_temp_*"
-rm "${root}/summary.txt"
 
+echo '' > "${root}/summary.txt"
 
 git clone -q git@gitee.com:SUMSC/Pandora-2nd-template.git "${root}/template"
 
