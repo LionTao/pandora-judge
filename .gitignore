@@ -102,3 +102,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+/pandora_temp_*

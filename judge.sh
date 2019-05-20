@@ -1,25 +1,36 @@
 #!/bin/bash
+set -e
+
 root=$(pwd)
 
-rm -rf template
-rm -rf pandora_temp_*
+rm -rf "${root}/template"
+rm -rf "${root}/pandora_temp_*"
+rm "${root}/summary.txt"
 
-git clone -q git@gitee.com:SUMSC/Pandora-2nd-template.git template
 
+git clone -q git@gitee.com:SUMSC/Pandora-2nd-template.git "${root}/template"
 
+pip3 install -U --user pip
+pip3 install  --user -U -r "${root}/template/requirements.txt"
+
+cd "${root}"
+python3 "${root}/get_all_user.py"
+
+sleep 1
 while read id_tag repo
 do
-    cd $PWD
+    cd "${root}"
     dir="${id_tag}_pandora"
-#    echo "Now judging $id_tag repo is : ${repo}"
+    echo -e "Now judging $id_tag \n repo : ${repo}"
 
     if [[ "$repo" == No* ]];then
-        echo "${id_tag} haven't submitted yet!"
+        echo -e "${id_tag} haven't submitted yet!\n"
         continue
 
     else
-        echo "Cloneing..."
-        git clone -q "${repo}" "pandora_temp_${id_tag}"
+        echo -e  "Cloneing...\c"
+        git clone -q "${repo}" "${root}/pandora_temp_${id_tag}"
+        echo "ok"
     fi
     scene="/tmp/${id_tag}"
     rm -rf ${scene}
@@ -27,9 +38,21 @@ do
     cp -R "${root}/template/tests" "${scene}/tests"
     cp -R "${root}/pandora_temp_${id_tag}/pandora" "${scene}/pandora"
     cd "${scene}/tests"
-    python3 grader.py ${id_tag} > /dev/null
+    python3 grader.py "${id_tag}" "${repo}" | grep "id:" >> "${root}/summary.txt"
     cd ${root}
-    echo "${id_tag} finished!"
+    echo -e "${id_tag} finished!\n"
+    rm -rf "${root}/pandora_temp_${id_tag}"
+    rm -rf ${scene}
 
 
-done < id_all.txt
+done < "${root}/id_all.txt"
+
+cd ${root}
+
+
+rm -rf "${root}/template"
+rm -rf "${root}/pandora_temp_*"
+rm "${root}/id_all.txt"
+
+echo "====== SUMMARY ========"
+cat "${root}/summary.txt"
