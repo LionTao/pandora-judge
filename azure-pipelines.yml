@@ -32,10 +32,6 @@ steps:
     displayName: 'Install dependencies'
 
   - script: |
-      sudo pip3 install pytest pytest-azurepipelines
-    displayName: 'install pytest'
-
-  - script: |
       set -e
 
       root=$(pwd)
@@ -92,4 +88,4 @@ steps:
       echo "====== SUMMARY ========"
       cat "${root}/summary.txt"
 
-    displayName: 'install pytest'
+    displayName: 'Auto Grade'
