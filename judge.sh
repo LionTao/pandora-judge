@@ -8,7 +8,7 @@ rm -rf "${root}/pandora_temp_*"
 
 echo '' > "${root}/summary.txt"
 
-git clone -q https://LionTao:${pat}@gitee.com/SUMSC/Pandora-2nd-template.git "${root}/template"
+git clone -q https://LionTao:$(gitee-pat)@gitee.com/SUMSC/Pandora-2nd-template.git "${root}/template"
 
 pip3 install -U --user pip
 pip3 install  --user -U -r "${root}/template/requirements.txt"
