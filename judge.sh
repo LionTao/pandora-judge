@@ -31,7 +31,7 @@ do
     else
         echo -e  "Cloneing...\c"
         git clone -q "${repo}" "${root}/pandora_temp_${id_tag}"
-        if [ -d "${root}/pandora_temp_${id_tag}/pandora" ];then
+        if  [[  $? -eq 0 ]]  && [[ -d "${root}/pandora_temp_${id_tag}/pandora"  ]];then
             echo "ok"
         else
             echo -e "\n[ERROR] Not a standard repo!"
