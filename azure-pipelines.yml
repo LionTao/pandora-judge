@@ -42,6 +42,12 @@ steps:
 
         git clone -q https://LionTao:$(gitee-pat)@gitee.com/SUMSC/Pandora-2nd-template.git "${root}/template"
 
+        if [ -d "${root}/template" ];then
+          sleep 1
+        else
+          exit 666
+        fi
+
         pip3 install -U --user pip
         pip3 install  --user -U -r "${root}/template/requirements.txt"
 
