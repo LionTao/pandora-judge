@@ -68,6 +68,7 @@ steps:
                   echo "ok"
               else
                   echo -e "\n[ERROR] Not a standard repo!"
+                  continue
               fi
           fi
           scene="/tmp/${id_tag}"
