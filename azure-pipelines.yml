@@ -82,7 +82,7 @@ steps:
             cp -R "${root}/template/tests" "${scene}/tests"
             cp -R "${root}/pandora_temp_${id_tag}/pandora" "${scene}/pandora"
             cd "${scene}/tests"
-            python3 grader.py "${id_tag}" "${repo}"  | grep "id:" >> "${root}/summary.txt"
+            python3 grader.py "${id_tag}" "${repo}"  #| grep "id:" >> "${root}/summary.txt"
             cd ${root}
             echo -e "[INFO] ${id_tag} finished!\n"
             rm -rf "${root}/pandora_temp_${id_tag}"
